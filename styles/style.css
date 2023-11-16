@@ -13,12 +13,18 @@
     padding-top: 10vh;
     display: flex;
     flex-direction: column;
-    gap: 50px;
+    gap: 20px;
+    align-items: baseline;
+    width: 100%;
+}
+
+body {
+    font-family: sans-serif;
 }
 
 table {
     border-collapse: collapse;
-    width: 80%;
+    width: 1000px;
     text-align: center;
 }
 
