@@ -38,61 +38,107 @@ handleOptionsInSelect();
 handleOptionsForColorSelect();
 
 
-// function filterByName(data, target) {
-//     const newDataSet = data.filter(element => {
-//         return element ==
-//     })
-// }
-
-
-select.addEventListener('change', function() {
-    data = carsData;
-    if (select.value == 'Hammasi') return displayDataOnTable(data);
-    const newDataSet = [];
+function filterByName(data, target, isAll) {
+    if (!data.length) return [];
+    if (isAll) {
+        return data;
+    }
+    const newDataSet = []; 
     data.forEach(element => {
-        if (element.name == select.value) {
+        if (element.name == target) {
             newDataSet.push(element);
         }
     })
+    return newDataSet;
+}
+
+
+
+function filterByYear(data, target, isAll) {
+    if (!data.length) return [];
+    if (isAll) return data;
+    const newDataSet = [];
+    data.forEach(element => {
+        if (element.year >= target) {
+            newDataSet.push(element);
+        }
+    })
+    return newDataSet;
+}
+function filterByColor(data, target, isAll) {
+    if (!data.length) return [];
+    if (isAll) return data;
+    const newDataSet = [];
+    data.forEach(element => {
+        if (element.color == target) {
+            newDataSet.push(element);
+        }
+    })
+    return newDataSet;
+}
+
+function filterByPrice(data, from, to, isAll) {
+    if (!data.length) return [];
+    if (isAll) return data;
+    const newDataSet = [];
+    data.forEach(element => {
+        if (element.price >= from && element.price <= to) {
+            newDataSet.push(element);
+        }
+    })
+    return newDataSet;
+}
+
+function filterByStatus(data, target, isAll) {
+    if (!data.length) return [];
+    if (isAll) return data;
+    const newDataSet = [];
+    data.forEach(element => {
+        if (element.status == target) {
+            newDataSet.push(element);
+        }
+    })
+    return newDataSet;
+}
+
+
+select.addEventListener('change', function() {
+    let isAll = false;
+    if (this.value == 'Hammasi') {
+        isAll = true;
+    }
+    const newDataSet = filterByName(data, this.value, isAll);
     displayDataOnTable(newDataSet);
-    data = newDataSet;
 })
 
 carYearStart.addEventListener('input', function() {
-    if (!data.length) return;
-    const newDataSet = data.filter(element => {
-        return carYearStart.value <= element.year;
-    });
-    displayDataOnTable(newDataSet);
-    data = newDataSet;
+    let isAll = false;
+    if (!this.value) {
+        isAll = true;
+    }
+    const newDataSet = filterByYear(data, this.value, isAll);
+    displayDataOnTable(newDataSet)
 })
 
 
 colorSelect.addEventListener('change', function() {
-    data = carsData;
-    if (colorSelect.value == 'Hammasi') return displayDataOnTable(data);
-    const newDataSet = [];
-    data.forEach(element => {
-        if (element.color == colorSelect.value) {
-            newDataSet.push(element);
-        }
-    })
-    displayDataOnTable(newDataSet);
-    data = newDataSet;
+
+    let isAll = false;
+    if (this.value == 'Hammasi') {
+        isAll = true;
+    }
+    const newDataSet = filterByColor(data, this.value, isAll);
+    displayDataOnTable(newDataSet)
 })
 
 
 priceStart.addEventListener('input', function() {
-    const newDataSet = data.filter((element, index) => {
-        return element.price >= parseInt(priceStart.value) && element.price <= parseInt(priceEnd.value);
-    })
-    displayDataOnTable(newDataSet);
+   this.value = this.value;
+   let value = this.value.toLocaleString();
+   console.log(value);
 })
 priceEnd.addEventListener('input', function() {
-    const newDataSet = data.filter((element, index) => {
-        return element.price >= parseInt(priceStart.value) && element.price <= parseInt(priceEnd.value);
-    })
-    displayDataOnTable(newDataSet);
+    
 })
 
 
