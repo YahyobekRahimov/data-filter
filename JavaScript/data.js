@@ -74,7 +74,7 @@ const data = [
     {
         id: 5,
         name: 'Spark',
-        year: 2012,
+        year: 2015,
         color: 'black',
         price: 4500,
         status: 'inactive'
@@ -114,7 +114,7 @@ const data = [
     {
         id: 5,
         name: 'Spark',
-        year: 2012,
+        year: 2016,
         color: 'black',
         price: 25500,
         status: 'active'
@@ -122,7 +122,7 @@ const data = [
     {
         id: 5,
         name: 'Spark',
-        year: 2012,
+        year: 2018,
         color: 'black',
         price: 60500,
         status: 'active'
@@ -195,7 +195,7 @@ const data = [
         id: 5,
         name: 'Spark',
         year: 2012,
-        color: 'black',
+        color: 'white',
         price: 4500,
         status: 'active'
     },
@@ -231,6 +231,14 @@ const data = [
         price: 4500,
         status: 'inactive'
     },
+    {
+        id: 34,
+        name: 'Spark',
+        year: 2023,
+        color: 'green',
+        price: 20000,
+        status: 'active'
+    }
   ];
 
   export {data};

@@ -18,17 +18,6 @@ data.forEach(element => {
 
 displayDataOnTable(data);
 
-
-
-
-
-searchInput.addEventListener('input', function() {
-    displayFilterResults(searchInput.value)
-})
-
-
-
-
 data.forEach(element => {
     carNames.push(element.name);
     carColors.push(element.color);
@@ -39,6 +28,7 @@ handleOptionsForColorSelect();
 
 
 function filterByName(data, target, isAll) {
+    if (target == 'Hammasi') return data;
     if (!data.length) return [];
     if (isAll) {
         return data;
@@ -55,6 +45,7 @@ function filterByName(data, target, isAll) {
 
 
 function filterByYear(data, target, isAll) {
+    if (!target) return data;
     if (!data.length) return [];
     if (isAll) return data;
     const newDataSet = [];
@@ -66,6 +57,7 @@ function filterByYear(data, target, isAll) {
     return newDataSet;
 }
 function filterByColor(data, target, isAll) {
+    if (target == 'Hammasi') return data;
     if (!data.length) return [];
     if (isAll) return data;
     const newDataSet = [];
@@ -78,10 +70,14 @@ function filterByColor(data, target, isAll) {
 }
 
 function filterByPrice(data, from, to, isAll) {
+    if (!from && !to) return data;
     if (!data.length) return [];
     if (isAll) return data;
     const newDataSet = [];
     data.forEach(element => {
+        console.log('element.price :', element.price);
+        console.log('from :', from);
+        console.log('to :', to);
         if (element.price >= from && element.price <= to) {
             newDataSet.push(element);
         }
@@ -90,6 +86,7 @@ function filterByPrice(data, from, to, isAll) {
 }
 
 function filterByStatus(data, target, isAll) {
+    if (target == 'Hammasi') return data;
     if (!data.length) return [];
     if (isAll) return data;
     const newDataSet = [];
@@ -103,58 +100,120 @@ function filterByStatus(data, target, isAll) {
 
 
 select.addEventListener('change', function() {
+    let from = removeCommaBetween(priceStart.value);
+    let to = removeCommaBetween(priceEnd.value);
     let isAll = false;
     if (this.value == 'Hammasi') {
         isAll = true;
     }
-    const newDataSet = filterByName(data, this.value, isAll);
+    let newDataSet = filterByName(data, this.value, isAll);
+    newDataSet = filterByColor(newDataSet, colorSelect.value);
+    newDataSet = filterByPrice(newDataSet, from, to);
+    newDataSet = filterByYear(newDataSet, carYearStart.value);
+    newDataSet = filterByStatus(newDataSet, statusSelect.value);
     displayDataOnTable(newDataSet);
 })
 
 carYearStart.addEventListener('input', function() {
+    let from = removeCommaBetween(priceStart.value);
+    let to = removeCommaBetween(priceEnd.value);
     let isAll = false;
     if (!this.value) {
         isAll = true;
     }
-    const newDataSet = filterByYear(data, this.value, isAll);
+    let newDataSet = filterByYear(data, this.value, isAll);
+    newDataSet = filterByName(newDataSet, select.value);
+    newDataSet = filterByColor(newDataSet, colorSelect.value);
+    newDataSet = filterByPrice(newDataSet, from, to);
+    newDataSet = filterByStatus(newDataSet, statusSelect.value);
     displayDataOnTable(newDataSet)
 })
 
 
 colorSelect.addEventListener('change', function() {
-
+    let from = removeCommaBetween(priceStart.value);
+    let to = removeCommaBetween(priceEnd.value);
     let isAll = false;
     if (this.value == 'Hammasi') {
         isAll = true;
     }
-    const newDataSet = filterByColor(data, this.value, isAll);
+    let newDataSet = filterByColor(data, this.value, isAll);
+    newDataSet = filterByYear(newDataSet, carYearStart.value);
+    newDataSet = filterByName(newDataSet, select.value);
+    newDataSet = filterByPrice(newDataSet, from, to);
+    newDataSet = filterByStatus(newDataSet, statusSelect.value);
     displayDataOnTable(newDataSet)
 })
 
 
 priceStart.addEventListener('input', function() {
-   this.value = this.value;
-   let value = this.value.toLocaleString();
-   console.log(value);
-})
-priceEnd.addEventListener('input', function() {
-    
+   this.value = putCommaBetween(this.value)
+   let from = removeCommaBetween(priceStart.value);
+   let to = removeCommaBetween(priceEnd.value);
+   let isAll;
+   if (!priceStart.value || !priceEnd.value) {
+    isAll = true;
+   } else {
+    isAll = false;
+   }
+   let newDataSet = filterByPrice(data, from, to, isAll);
+    newDataSet = filterByColor(newDataSet, colorSelect.value);
+    newDataSet = filterByYear(newDataSet, carYearStart.value);
+    newDataSet = filterByName(newDataSet, select.value);
+    newDataSet = filterByStatus(newDataSet, statusSelect.value);
+   displayDataOnTable(newDataSet);
 })
 
+priceEnd.addEventListener('input', function() {
+    this.value = putCommaBetween(this.value)
+    let from = removeCommaBetween(priceStart.value);
+    let to = removeCommaBetween(priceEnd.value);
+    let isAll;
+    if (!priceStart.value || !priceEnd.value) {
+     isAll = true;
+    } else {
+      isAll = false;
+    }
+    let newDataSet = filterByPrice(data, from, to, isAll);
+    console.log(newDataSet);
+    newDataSet = filterByColor(newDataSet, colorSelect.value);
+    newDataSet = filterByYear(newDataSet, carYearStart.value);
+    newDataSet = filterByName(newDataSet, select.value);
+    newDataSet = filterByStatus(newDataSet, statusSelect.value);
+    displayDataOnTable(newDataSet);
+})
 
 statusSelect.addEventListener('change', function() {
-    const newDataSet = [];
-    data.forEach(element => {
-        console.log(element.status + statusSelect.value);
-        if (element.status == statusSelect.value) {
-            newDataSet.push(element);
-        }
-    })
+    let isAll = false;
+    if (this.value == 'Hammasi') {
+        isAll = true;
+    }
+    let from = removeCommaBetween(priceStart.value);
+    let to = removeCommaBetween(priceEnd.value);     
+    let newDataSet = filterByStatus(data, this.value, isAll);
+    newDataSet = filterByPrice(newDataSet, from, to);
+    newDataSet = filterByColor(newDataSet, colorSelect.value);
+    newDataSet = filterByYear(newDataSet, carYearStart.value);
+    newDataSet = filterByName(newDataSet, select.value);
     displayDataOnTable(newDataSet);
 })
 
 // ! Functions 
+function putCommaBetween(value) {
+   if (isNaN(value[value.length - 1])) {
+    return value.slice(0, -1)
+    
+   }
+    value = value.split(',');
+    let number = Number(value.join(''));
+    return number.toLocaleString();
+}
 
+function removeCommaBetween(value) {
+    let arr = value.split(',');
+    let number = arr.join('');
+    return number;
+}
 function handleOptionsForColorSelect() {
     const optionsAlreadyEntered = [];
     for (let i = 0; i < carColors.length; i++) {
@@ -187,26 +246,6 @@ function handleOptionsInSelect() {
 function displayOption(carName) {
     let str = `<option value="${carName}">${carName}</option>`
     select.innerHTML += str;
-}
-
-function displayFilterResults(input) {
-    const searchLength = input.trim().length;
-    let dataToBeDisplayed = '';
-    data.forEach((element, index) => {
-        if (element.name.slice(0, searchLength).toLocaleLowerCase() == input.trim().toLocaleLowerCase()) {
-            const carData = `
-            <tr>
-                <td>${index + 1}</td>
-                <td>${element.name}</td>
-                <td>${element.year}</td>
-                <td>${element.color}</td>
-                <td>$${element.price.toLocaleString()}</td>
-                <td>${element.status}</td>
-            </tr>`
-            dataToBeDisplayed += carData;
-        }
-    })
-    tbody.innerHTML = dataToBeDisplayed;
 }
 
 function displayDataOnTable(dataSet) {
