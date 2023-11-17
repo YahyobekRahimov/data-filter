@@ -1,10 +1,11 @@
-import { data as carsData} from "./data.js";
+import { addListenerToDeleteButtons, addListenerToEditButtons } from "./CRUD.js";
+
+const carsData = JSON.parse(localStorage.getItem('cars')) || [];
 const tbody = document.querySelector('tbody');
 
 let data = [...carsData];
 let colorSelect = document.getElementById('color');
 
-const searchInput = document.querySelector('input[name="search"]');
 const select = document.getElementById('carName');
 const carNames = [];
 const carColors = [];
@@ -112,6 +113,10 @@ select.addEventListener('change', function() {
     newDataSet = filterByYear(newDataSet, carYearStart.value);
     newDataSet = filterByStatus(newDataSet, statusSelect.value);
     displayDataOnTable(newDataSet);
+    const EDIT_BUTTONS = document.querySelectorAll('.edit');
+    const DELETE_BUTTONS = document.querySelectorAll('.delete');
+    addListenerToDeleteButtons(DELETE_BUTTONS);
+    addListenerToEditButtons(EDIT_BUTTONS);
 })
 
 carYearStart.addEventListener('input', function() {
@@ -126,7 +131,11 @@ carYearStart.addEventListener('input', function() {
     newDataSet = filterByColor(newDataSet, colorSelect.value);
     newDataSet = filterByPrice(newDataSet, from, to);
     newDataSet = filterByStatus(newDataSet, statusSelect.value);
-    displayDataOnTable(newDataSet)
+    displayDataOnTable(newDataSet);
+    const EDIT_BUTTONS = document.querySelectorAll('.edit');
+    const DELETE_BUTTONS = document.querySelectorAll('.delete');
+    addListenerToDeleteButtons(DELETE_BUTTONS);
+    addListenerToEditButtons(EDIT_BUTTONS);
 })
 
 
@@ -142,7 +151,11 @@ colorSelect.addEventListener('change', function() {
     newDataSet = filterByName(newDataSet, select.value);
     newDataSet = filterByPrice(newDataSet, from, to);
     newDataSet = filterByStatus(newDataSet, statusSelect.value);
-    displayDataOnTable(newDataSet)
+    displayDataOnTable(newDataSet);
+    const EDIT_BUTTONS = document.querySelectorAll('.edit');
+    const DELETE_BUTTONS = document.querySelectorAll('.delete');
+    addListenerToDeleteButtons(DELETE_BUTTONS);
+    addListenerToEditButtons(EDIT_BUTTONS);
 })
 
 
@@ -162,6 +175,10 @@ priceStart.addEventListener('input', function() {
     newDataSet = filterByName(newDataSet, select.value);
     newDataSet = filterByStatus(newDataSet, statusSelect.value);
    displayDataOnTable(newDataSet);
+   const EDIT_BUTTONS = document.querySelectorAll('.edit');
+    const DELETE_BUTTONS = document.querySelectorAll('.delete');
+    addListenerToDeleteButtons(DELETE_BUTTONS);
+    addListenerToEditButtons(EDIT_BUTTONS);
 })
 
 priceEnd.addEventListener('input', function() {
@@ -181,6 +198,10 @@ priceEnd.addEventListener('input', function() {
     newDataSet = filterByName(newDataSet, select.value);
     newDataSet = filterByStatus(newDataSet, statusSelect.value);
     displayDataOnTable(newDataSet);
+    const EDIT_BUTTONS = document.querySelectorAll('.edit');
+    const DELETE_BUTTONS = document.querySelectorAll('.delete');
+    addListenerToDeleteButtons(DELETE_BUTTONS);
+    addListenerToEditButtons(EDIT_BUTTONS);
 })
 
 statusSelect.addEventListener('change', function() {
@@ -196,6 +217,10 @@ statusSelect.addEventListener('change', function() {
     newDataSet = filterByYear(newDataSet, carYearStart.value);
     newDataSet = filterByName(newDataSet, select.value);
     displayDataOnTable(newDataSet);
+    const EDIT_BUTTONS = document.querySelectorAll('.edit');
+    const DELETE_BUTTONS = document.querySelectorAll('.delete');
+    addListenerToDeleteButtons(DELETE_BUTTONS);
+    addListenerToEditButtons(EDIT_BUTTONS);
 })
 
 // ! Functions 
@@ -248,7 +273,7 @@ function displayOption(carName) {
     select.innerHTML += str;
 }
 
-function displayDataOnTable(dataSet) {
+export function displayDataOnTable(dataSet) {
     let dataToBeDisplayed = ``;
     dataSet.forEach((item, index) => {
        const carData = `
@@ -259,6 +284,10 @@ function displayDataOnTable(dataSet) {
             <td>${item.color}</td>
             <td>$${item.price.toLocaleString()}</td>
             <td>${item.status}</td>
+            <td>
+                <button class='edit edit_${item.id}'>Edit</button>
+                <button class='delete delete_${item.id}'>Delete</button>
+            </td>
         </tr>`;
        dataToBeDisplayed += carData; 
     })

@@ -4,12 +4,19 @@
     box-sizing: border-box;
 }
 
+body {
+    background-color: rgb(191, 227, 249);
+}
+
 .container {
     width: 100%;
     max-width: 1440px;
     margin-right: auto;
     margin-left: auto;
 
+}
+
+.filters__container {
     padding-top: 10vh;
     display: flex;
     flex-direction: column;
@@ -66,37 +73,299 @@ tbody > :nth-child(odd) {
     background-color: rgb(220, 255, 220);
 }
 
-select {
-    font-size: 30px;
-}
-
-.filter-by-categories {
+.filters-wrappers {
     display: flex;
-    justify-content: center;
     align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 100px;
 }
 
-label {
-    font-size: 30px;
-    margin-right: 30px;
+.filters-wrappers div select,
+.filters-wrappers div span {
+    font-size: 16px;
 }
 
-.filter-by-categories2 > :nth-child(2){
-    margin-right: 20px;
+.filters-wrappers > div {
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 10px;
+    background-color: rgb(26, 176, 231);
+    border-radius: 10px;
 }
 
-.filter-by-categories2 input {
+.filters-wrappers > div select {
+    width: min-content;
+    font-size: 30px;
+    padding: 5px;
+    border: none;
+    border-radius: 10px;;
+}
+
+.filters-wrappers > div input {
     width: 100px;
+    padding: 5px;
+    border-radius: 10px;
+    border: none;
+}
+
+.filters-wrappers > div label {
+    font-weight: 700;
+    font-size: 30px;
+}
+.filters-wrappers div input {
     font-size: 30px;
 }
 
-.filter-by-categories4 input {
-    font-size: 30px;
-    width: 150px;
+.filter-by-categories2 > div {
+    display: flex;
+    flex-direction: column;
+    white-space: nowrap;
+    gap: 10px;
 }
 
-.filter-by-categories4 span {
+.filter-by-categories4 > div {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.filter-by-categories4 > div input {
+    width: 140px;
+}
+
+.filter-by-categories4 > div span {
     font-size: 30px;
-    margin-right: 5px;
+}
+
+.filter-by-categories4 > div label {
+    font-size: 20px;
+}
+
+.add-new {
+    padding: 10px 20px;
+    font-size: 20px;
+    margin-right: auto;
+    margin-left: auto;
+    display: block;
+    margin-top: 20px;
+    color: green;
+    font-weight: 700;
+    border: 3px solid rgb(74, 122, 74);
+    cursor: pointer;
+    background-color: transparent;
+    border-radius: 12px;
+    transition: 0.2s all ease-in;
+}
+
+.add-new:hover {
+    color: white;
+    background-color: rgb(68, 117, 68);
+}
+
+.addNew__container {
+    display: flex;
+    position: absolute;
+    top: 12vh;
+    left: 33vw;
+    flex-direction: column;
+    background-color: white;
+    width: max-content;
+    padding: 30px;
+    border-radius: 10px;
+    gap: 30px;
+}
+
+.inputs-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.inputs-wrapper input {
+    font-size: 30px;
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: 2px solid rgb(74, 122, 74);
+    width: 400px;
+}
+
+.price-range {
+    display: flex;
+    justify-content: space-between;
+}
+
+.price-range input {
+    width: 190px;
+}
+
+.inputs-wrapper input:focus {
+    outline: 3px solid rgb(30, 46, 30);
+    border: none;
+}
+
+.addNew-submit {
+    padding: 12px 70px;
+    font-size: 20px;
+    margin-right: auto;
+    margin-left: auto;
+    display: block;
+    margin-top: 20px;
+    color: green;
+    font-weight: 700;
+    border: 3px solid rgb(74, 122, 74);
+    cursor: pointer;
+    background-color: transparent;
+    border-radius: 12px;
+    transition: 0.2s all ease-in;
+}
+
+.addNew-submit:hover {
+    color: white;
+    background-color: rgb(68, 117, 68);
+}
+
+.addNew-cancel {
+    padding: 8px 20px;
+    font-size: 16px;
+    margin-right: auto;
+    margin-left: auto;
+    display: block;
+    margin-top: 20px;
+    color: red;
+    font-weight: 600;
+    border: 2px solid rgb(247, 103, 103);
+    cursor: pointer;
+    background-color: transparent;
+    border-radius: 8px;
+    transition: 0.2s all ease-in;
+}
+
+.addNew-cancel:hover {
+    color: white;
+    background-color: rgb(250, 57, 57);
+}
+
+.addNew__container h2 {
+    font-size: 30px;
+    text-align: center;
+}
+
+.addNew-section {
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.678);
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    backdrop-filter: blur(5px);
+    box-shadow: 0px 0px 4px 8px;
+    display: none;
+}
+
+.display-block {
+    display: block!important;
+}
+
+.edit {
+    padding: 5px 20px;
+    font-size: 20px;
+    background-color: transparent;
+    color: blue;
+    border-color: blue;
+    cursor: pointer;
+    margin-right: 10px;
+    font-weight: 800;
+}
+
+.delete {
+    padding: 5px 20px;
+    font-size: 20px;
+    background-color: transparent;
+    color: rgb(230, 7, 7);
+    border-color: rgb(225, 3, 3);
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.edit-section {
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.678);
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    backdrop-filter: blur(5px);
+    box-shadow: 0px 0px 4px 8px;
+    display: none;
+}
+
+.edit__container {
+    display: flex;
+    position: absolute;
+    top: 7vh;
+    left: 33vw;
+    flex-direction: column;
+    background-color: white;
+    width: max-content;
+    padding: 30px;
+    border-radius: 10px;
+    gap: 30px;
+}
+
+.edit-submit {
+    padding: 12px 70px;
+    font-size: 20px;
+    margin-right: auto;
+    margin-left: auto;
+    display: block;
+    margin-top: 20px;
+    color: green;
+    font-weight: 700;
+    border: 3px solid rgb(74, 122, 74);
+    cursor: pointer;
+    background-color: transparent;
+    border-radius: 12px;
+    transition: 0.2s all ease-in;
+}
+
+.edit-submit:hover {
+    color: white;
+    background-color: rgb(68, 117, 68);
+}
+
+.edit-cancel {
+    padding: 8px 20px;
+    font-size: 16px;
+    margin-right: auto;
+    margin-left: auto;
+    display: block;
+    margin-top: 20px;
+    color: red;
+    font-weight: 600;
+    border: 2px solid rgb(247, 103, 103);
+    cursor: pointer;
+    background-color: transparent;
+    border-radius: 8px;
+    transition: 0.2s all ease-in;
+}
+
+.edit-cancel:hover {
+    color: white;
+    background-color: rgb(250, 57, 57);
+}
+
+.edit__container h2 {
+    font-size: 30px;
+    text-align: center;
+}
+
+.inputs-wrapper select {
+    font-size: 30px;
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: 2px solid rgb(74, 122, 74);
+    width: 400px;
 }

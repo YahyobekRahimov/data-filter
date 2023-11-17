@@ -8,50 +8,90 @@
 </head>
 <body>
     <main>
-        <div class="container">
-            <div class="filter-by-categories">
-                <label for="carName">
-                    Mashinalar <strong>nomi</strong>ga qarab qidirish:
-                </label>
-                <select name="carName" id="carName">
-                    <option selected value="Hammasi">Hammasi</option>
-                </select>
+        <section class="addNew-section">
+            <div class="container addNew__container">
+                <h2>Ma'lumotlarni kiriting</h2>
+                <div class="inputs-wrapper">
+                    <input type="text" name="car-name" id="car-name" placeholder="Nomi">
+                    <input type="number" name="car-year" id="car-year" placeholder="Yili">
+                    <input type="text" name="color" id="car-color" placeholder="Rangi">
+                        <input type="number" name="price" id="car-price" placeholder="Narxi">
+                    <button class="addNew-submit">Qo'shish</button>
+                    <button class="addNew-cancel">Bekor qilish</button>
+                </div>
             </div>
-            <div class="filter-by-categories filter-by-categories2">
-                <label for="carYear">
-                    Mashinalar <strong>yili</strong>ga qarab qidirish:
-                </label>
-                <input type="number" name="carYearStart" id="carYearStart">
-                <label for="carYearStart">dan 2023 gacha</label>
+        </section>
+        <section class="edit-section">
+            <div class="container edit__container">
+                <h2>Ma'lumotlarni yangilang</h2>
+                <div class="inputs-wrapper">
+                    <input type="text" name="edit-name" id="edited-name" placeholder="Nomi">
+                    <input type="number" name="car-year" id="edited-year" placeholder="Yili">
+                    <input type="text" name="color" id="edited-color" placeholder="Rangi">
+                    <input type="number" name="price" id="edited-price" placeholder="Narxi">
+                    <select name="Status" class="edited-status">
+                        <option value="active">Sotuvda</option>
+                        <option value="inactive">Sotuvda emas</option>
+                    </select>
+                    <button class="edit-submit">Qo'shish</button>
+                    <button class="edit-cancel">Bekor qilish</button>
+                </div>
             </div>
-            <div class="filter-by-categories filter-by-categories3">
-                <label for="carYear">
-                    Mashinalarni <strong>rangiga</strong> qarab qidirish:
-                </label>
-                <select name="color" id="color">
-                    <option selected value="Hammasi">Hammasi</option>
-                </select>
-            </div>
-            <div class="filter-by-categories filter-by-categories4">
-                <label>
-                    <strong>Narx oralig'i</strong>
-                </label>
-                <span>$</span>
-                <input type="text" name="carPriceStart" id="carPriceStart">
-                <label for="carPriceStart">dan</label>
-                <span>$</span>
-                <input type="text" name="carPriceEnd" id="carPriceEnd">
-                <label for="carPriceEnd">gacha</label>
-            </div>
-            <div class="filter-by-categories filter-by-categories5">
-                <label for="carName">
-                    <strong>Status</strong>:
-                </label>
-                <select name="carStatus" id="carStatus">
-                    <option selected value="Hammasi">Hammasi</option>
-                    <option value="Sotuvda">Sotuvda</option>
-                    <option value="Sotuvda emas">Sotuvda emas</option>
-                </select>
+        </section>
+        <button class="add-new">Yangi ma'lumot qo'shish</button>
+        <div class="container filters__container">
+            <div class="filters-wrappers">
+                <div class="filter-by-categories">
+                    <label for="carName">
+                        <strong>Mashina nomi</strong>
+                    </label>
+                    <select name="carName" id="carName">
+                        <option selected value="Hammasi">Hammasi</option>
+                    </select>
+                </div>
+                <div class="filter-by-categories filter-by-categories2">
+                    <label for="carYear">
+                        <strong>Yili</strong>
+                    </label>
+                    <div>
+                        <input type="number" name="carYearStart" id="carYearStart">
+                    </div>
+                </div>
+                <div class="filter-by-categories filter-by-categories3">
+                    <label for="carYear">
+                        <strong>Rangi</strong>
+                    </label>
+                    <select name="color" id="color">
+                        <option selected value="Hammasi">Hammasi</option>
+                    </select>
+                </div>
+                <div class="filter-by-categories filter-by-categories4">
+                    <label>
+                        <strong>Narx oralig'i</strong>
+                    </label>
+                    <div>
+                        <div>
+                            <span>$</span>
+                            <input type="text" name="carPriceStart" id="carPriceStart">
+                            <label for="carPriceStart">dan</label>
+                        </div>
+                        <div>
+                            <span>$</span>
+                            <input type="text" name="carPriceEnd" id="carPriceEnd">
+                            <label for="carPriceEnd">gacha</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="filter-by-categories filter-by-categories5">
+                    <label for="carName">
+                        <strong>Status</strong>:
+                    </label>
+                    <select name="carStatus" id="carStatus">
+                        <option selected value="Hammasi">Hammasi</option>
+                        <option value="Sotuvda">Sotuvda</option>
+                        <option value="Sotuvda emas">Sotuvda emas</option>
+                    </select>
+                </div>
             </div>
             <div class="table-wrapper">
                 <table>
@@ -63,6 +103,7 @@
                             <th>Rangi</th>
                             <th>Narxi</th>
                             <th>Status</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
     
@@ -74,4 +115,5 @@
     </main>
 </body>
 <script src="./JavaScript/app.js" type="module"></script>
+<script src="./JavaScript/CRUD.js" type="module"></script>
 </html>
